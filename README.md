@@ -1,6 +1,6 @@
 # google-map-ts-vue3
 
-[![npm version](https://badge.fury.io/js/google-map-ts-vue3.svg)](https://www.npmjs.com/package/google-map-ts-vue3) [![TypeScript](https://badges.frapsoft.com/typescript/code/typescript.svg?v=101)](https://github.com/ellerbrock/typescript-badges/) ![npm bundle size](https://img.shields.io/bundlephobia/min/google-map-ts-vue3.svg) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
+[![npm version](https://badge.fury.io/js/google-map-ts-vue3.svg)](https://www.npmjs.com/package/google-map-ts-vue3) [![TypeScript](https://badges.frapsoft.com/typescript/code/typescript.svg?v=101)](https://github.com/ellerbrock/typescript-badges/) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
 
 Google Maps component implemented in Vue3 and TypeScript.
 
