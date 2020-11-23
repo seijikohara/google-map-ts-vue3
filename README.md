@@ -122,3 +122,12 @@ export default defineComponent({
 | polygons     | FALSE    | google.maps.PolygonOptions[]   | []                        | [PolygonOptions object](https://developers.google.com/maps/documentation/javascript/reference/polygon#PolygonOptions)     |
 | circles      | FALSE    | google.maps.CircleOptions[]    | []                        | [CircleOptions object](https://developers.google.com/maps/documentation/javascript/reference/polygon#CircleOptions)       |
 | rectangles   | FALSE    | google.maps.RectangleOptions[] | []                        | [RectangleOptions object](https://developers.google.com/maps/documentation/javascript/reference/polygon#RectangleOptions) |
+
+## Events
+
+- map-created(map: [google.maps.Map](https://developers.google.com/maps/documentation/javascript/reference/map#Map))
+- markers-created(markers: [google.maps.Marker[]](https://developers.google.com/maps/documentation/javascript/reference/marker#Marker))
+- polylines-created(polylines: [google.maps.Polyline[]](https://developers.google.com/maps/documentation/javascript/reference/polygon#Polyline))
+- polygons-created(polygons: [google.maps.Polygon[]](https://developers.google.com/maps/documentation/javascript/reference/polygon#Polygon))
+- circles-created(circles: [google.maps.Circle[]](https://developers.google.com/maps/documentation/javascript/reference/polygon#Circle))
+- rectangles-created(rectangles: [google.maps.Rectangle[]](https://developers.google.com/maps/documentation/javascript/reference/polygon#Rectangle))

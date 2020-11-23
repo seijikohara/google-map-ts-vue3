@@ -82,10 +82,19 @@
         },
       },
     ]"
+    @map-created="onMapCreated"
+    @markers-created="onMarkersCreated"
+    @polylines-created="onPolylinesCreated"
+    @polygons-created="onPolygonsCreated"
+    @circles-created="onCirclesCreated"
+    @rectangles-created="onRectanglesCreated"
   />
 </template>
 
 <script lang="ts">
+/// <reference types="googlemaps" />
+/* eslint-disable no-undef */
+
 import { defineComponent } from "vue";
 
 import { GoogleMap } from "./components";
@@ -98,6 +107,17 @@ export default defineComponent({
   setup() {
     return {
       apiKey: process.env.VUE_APP_GOOGLE_MAPS_API_KEY,
+      onMapCreated: (map: google.maps.Map) => console.log("map: ", map),
+      onMarkersCreated: (markers: google.maps.Marker[]) =>
+        console.log("markers: ", markers),
+      onPolylinesCreated: (polylines: google.maps.Polyline[]) =>
+        console.log("polylines: ", polylines),
+      onPolygonsCreated: (polygons: google.maps.Polygon[]) =>
+        console.log("polygons: ", polygons),
+      onCirclesCreated: (circles: google.maps.Circle[]) =>
+        console.log("circles: ", circles),
+      onRectanglesCreated: (rectangles: google.maps.Rectangle[]) =>
+        console.log("rectangles: ", rectangles),
     };
   },
 });
