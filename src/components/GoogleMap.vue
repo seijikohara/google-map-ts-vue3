@@ -1,9 +1,5 @@
 <template>
-  <div ref="googleMapRef" :style="{ height: height, width: width }">
-    <template v-if="state.google && state.map">
-      <slot :google="state.google" :map="state.map" />
-    </template>
-  </div>
+  <div ref="googleMapRef" :style="{ height: height, width: width }" />
 </template>
 
 <script lang="ts">
