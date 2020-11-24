@@ -1,3 +1,3 @@
 export interface Google {
-  maps: unknown;
+  maps: Record<string, unknown>;
 }
