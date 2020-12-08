@@ -1,11 +1,10 @@
 import { stringify } from "query-string";
-import { Google } from "./Google";
 
 type GoogleMapsScriptHandler = () => void;
 
 interface GoogleMapWindow extends Window {
   handleLoadGoogleMapsScript: GoogleMapsScriptHandler;
-  google: Google;
+  google: unknown;
 }
 declare const window: GoogleMapWindow;
 
@@ -16,12 +15,12 @@ export type GoogleMapsScriptLoadParams = {
 
 export function loadGoogleMapsScript(
   params: GoogleMapsScriptLoadParams
-): Promise<Google> {
+): Promise<void> {
   return new Promise((resolve, reject) => {
     console.info("[GoogleMap] Script loading.");
     if (window.google) {
       console.info("[GoogleMap] Script already loaded.");
-      return resolve(window.google);
+      return resolve();
     }
 
     const headElement = document.querySelector("head");
@@ -37,7 +36,7 @@ export function loadGoogleMapsScript(
     headElement.appendChild(scriptElement);
     window.handleLoadGoogleMapsScript = () => {
       console.info("[GoogleMap] Script loaded.");
-      resolve(window.google);
+      resolve();
     };
     setTimeout(() => {
       if (!window.google) {
