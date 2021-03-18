@@ -27,7 +27,7 @@
   "dependencies": {
     "@types/googlemaps": "^3.40.4",
     "core-js": "^3.8.1",
-    "query-string": "^6.13.7",
+    "query-string": "^7.0.0",
     "vue": "^3.0.4"
   },
   "devDependencies": {
