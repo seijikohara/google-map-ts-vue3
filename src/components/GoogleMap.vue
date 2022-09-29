@@ -3,7 +3,7 @@
 </template>
 
 <script lang="ts">
-/// <reference types="googlemaps" />
+/// <reference types="google.maps" />
 /* eslint-disable no-undef */
 import { defineComponent, onMounted, PropType, ref, watch } from "vue";
 
@@ -78,7 +78,7 @@ export default defineComponent({
     },
   },
   setup(props: Props, { emit }) {
-    let map = {} as google.maps.Map<Element>;
+    let map = {} as google.maps.Map;
     let markers = [] as google.maps.Marker[];
     let polylines = [] as google.maps.Polyline[];
     let polygons = [] as google.maps.Polygon[];
@@ -88,14 +88,14 @@ export default defineComponent({
     function createMap(
       mapElement: HTMLElement,
       option: google.maps.MapOptions
-    ): google.maps.Map<Element> {
+    ): google.maps.Map {
       const map = new google.maps.Map(mapElement, { ...option });
       emit("map-created", map);
       return map;
     }
 
     function createMarkers(
-      map: google.maps.Map<Element>,
+      map: google.maps.Map,
       options: google.maps.MarkerOptions[]
     ): google.maps.Marker[] {
       const markers = options.map(
@@ -106,7 +106,7 @@ export default defineComponent({
     }
 
     function createPolylines(
-      map: google.maps.Map<Element>,
+      map: google.maps.Map,
       options: google.maps.PolylineOptions[]
     ): google.maps.Polyline[] {
       const polylines = options.map(
@@ -117,7 +117,7 @@ export default defineComponent({
     }
 
     function createPolygons(
-      map: google.maps.Map<Element>,
+      map: google.maps.Map,
       options: google.maps.PolylineOptions[]
     ): google.maps.Polygon[] {
       const polygons = options.map(
@@ -128,7 +128,7 @@ export default defineComponent({
     }
 
     function createCircles(
-      map: google.maps.Map<Element>,
+      map: google.maps.Map,
       options: google.maps.CircleOptions[]
     ): google.maps.Circle[] {
       const circles = options.map(
@@ -139,7 +139,7 @@ export default defineComponent({
     }
 
     function createRectangles(
-      map: google.maps.Map<Element>,
+      map: google.maps.Map,
       options: google.maps.RectangleOptions[]
     ): google.maps.Rectangle[] {
       const rectangles = options.map(

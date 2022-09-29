@@ -38,7 +38,7 @@
 </template>
 
 <script lang="ts">
-/// <reference types="googlemaps" />
+/// <reference types="google.maps" />
 /* eslint-disable no-undef */
 
 import { defineComponent, reactive, watch } from "vue";
