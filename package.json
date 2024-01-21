@@ -1,7 +1,7 @@
 {
   "name": "google-map-ts-vue3",
   "version": "0.4.0",
-  "description": "Google Map Vue3 Component for TypeScript",
+  "description": "Google Map Vue3 Component",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/seijikohara/google-map-ts-vue3.git"
@@ -18,13 +18,26 @@
     "url": "https://github.com/seijikohara/google-map-ts-vue3/issues"
   },
   "homepage": "https://github.com/seijikohara/google-map-ts-vue3#readme",
-  "main": "src/components/index.ts",
+  "type": "module",
+  "main": "./dist/google-map-ts-vue3.umd.js",
+  "module": "./dist/google-map-ts-vue3.es.js",
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/src/components/index.d.ts",
+        "default": "./dist/google-map-ts-vue3.es.js"
+      },
+      "require": "./dist/google-map-ts-vue3.umd.js"
+    }
+  },
+  "types": "./dist/src/components/index.d.ts",
   "scripts": {
     "dev": "vite",
-    "build": "run-p type-check \"build-only {@}\" --",
+    "build": "vite build && vue-tsc --emitDeclarationOnly",
     "preview": "vite preview",
-    "build-only": "vite build",
-    "type-check": "vue-tsc --noEmit -p tsconfig.app.json --composite false",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
     "format": "prettier --write src/"
   },

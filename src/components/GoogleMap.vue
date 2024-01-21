@@ -1,32 +1,35 @@
+<script lang="ts">
+/// <reference types="google.maps" />
+
+export type Props = {
+  apiKey: string
+  libraries: string
+  height?: string
+  width?: string
+  options: google.maps.MapOptions
+  markers?: google.maps.MarkerOptions[]
+  polylines?: google.maps.PolylineOptions[]
+  polygons?: google.maps.PolygonOptions[]
+  circles?: google.maps.CircleOptions[]
+  rectangles?: google.maps.RectangleOptions[]
+}
+</script>
+
 <script lang="ts" setup>
 /// <reference types="google.maps" />
 
 import { ref, onMounted, watch } from 'vue'
 import { loadGoogleMapsScript } from './GoogleMapLoader'
 
-const props = withDefaults(
-  defineProps<{
-    apiKey: string
-    libraries: string
-    height?: string
-    width?: string
-    options: google.maps.MapOptions
-    markers?: google.maps.MarkerOptions[]
-    polylines?: google.maps.PolylineOptions[]
-    polygons?: google.maps.PolygonOptions[]
-    circles?: google.maps.CircleOptions[]
-    rectangles?: google.maps.RectangleOptions[]
-  }>(),
-  {
-    height: '500px',
-    width: '500px',
-    markers: () => [],
-    polylines: () => [],
-    polygons: () => [],
-    circles: () => [],
-    rectangles: () => []
-  }
-)
+const props = withDefaults(defineProps<Props>(), {
+  height: '500px',
+  width: '500px',
+  markers: () => [],
+  polylines: () => [],
+  polygons: () => [],
+  circles: () => [],
+  rectangles: () => []
+})
 
 const emit = defineEmits([
   'map-created',
