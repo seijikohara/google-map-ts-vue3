@@ -2,11 +2,15 @@
 
 [![npm version](https://badge.fury.io/js/google-map-ts-vue3.svg)](https://www.npmjs.com/package/google-map-ts-vue3) [![TypeScript](https://badges.frapsoft.com/typescript/code/typescript.svg?v=101)](https://github.com/ellerbrock/typescript-badges/) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
 
-Google Maps component implemented in Vue3 and TypeScript.
+Google Maps component implemented in Vue3.
 
 ## Example
 
 ```vue
+<script setup lang="ts">
+import { GoogleMap } from "google-map-ts-vue3";
+</script>
+
 <template>
   <GoogleMap
     apiKey="your google maps api key"
@@ -93,35 +97,23 @@ Google Maps component implemented in Vue3 and TypeScript.
     ]"
   />
 </template>
-
-<script lang="ts">
-import { defineComponent } from "vue";
-
-import { GoogleMap } from "google-map-ts-vue3";
-
-export default defineComponent({
-  name: "App",
-  components: {
-    GoogleMap,
-  },
-});
-</script>
 ```
 
 ## Props
 
-| Props        | Required | Param Type                     | Default value             | Description                                                                                                               |
-|--------------|----------|--------------------------------|---------------------------|---------------------------------------------------------------------------------------------------------------------------|
-| apiKey       | TRUE     | String                         |                           | [Google Maps  API Key](https://developers.google.com/maps/documentation/javascript/get-api-key)                           |
-| libraries    | FALSE    | String                         | "geometry,drawing,places" | [Libraries to load](https://developers.google.com/maps/documentation/javascript/libraries)                                |
-| height       | FALSE    | String                         | "500px"                   | The height of Google Maps                                                                                                 |
-| width        | FALSE    | String                         | "500px"                   | The width of Google Maps                                                                                                  |
-| options      | TRUE     | google.maps.MapOptions         |                           | [MapOptions object](https://developers.google.com/maps/documentation/javascript/reference/map#MapOptions)                 |
-| markers      | FALSE    | google.maps.MarkerOptions[]    | []                        | [MarkerOptions object](https://developers.google.com/maps/documentation/javascript/reference/marker#MarkerOptions)        |
-| polylines    | FALSE    | google.maps.PolylineOptions[]  | []                        | [PolylineOptions object](https://developers.google.com/maps/documentation/javascript/reference/polygon#PolylineOptions)   |
-| polygons     | FALSE    | google.maps.PolygonOptions[]   | []                        | [PolygonOptions object](https://developers.google.com/maps/documentation/javascript/reference/polygon#PolygonOptions)     |
-| circles      | FALSE    | google.maps.CircleOptions[]    | []                        | [CircleOptions object](https://developers.google.com/maps/documentation/javascript/reference/polygon#CircleOptions)       |
-| rectangles   | FALSE    | google.maps.RectangleOptions[] | []                        | [RectangleOptions object](https://developers.google.com/maps/documentation/javascript/reference/polygon#RectangleOptions) |
+| Props                | Required | Param Type                     | Default value             | Description                                                                                                               |
+|----------------------|----------|--------------------------------|---------------------------|---------------------------------------------------------------------------------------------------------------------------|
+| apiKey               | TRUE     | string                         |                           | [Google Maps  API Key](https://developers.google.com/maps/documentation/javascript/get-api-key)                           |
+| scriptLoadingTimeout | FALSE    | number                         | 5000                      | Timeout for loading the Google Map script                                                                                 |
+| libraries            | FALSE    | string                         | "geometry,drawing,places" | [Libraries to load](https://developers.google.com/maps/documentation/javascript/libraries)                                |
+| height               | FALSE    | string                         | "500px"                   | The height of Google Maps                                                                                                 |
+| width                | FALSE    | string                         | "500px"                   | The width of Google Maps                                                                                                  |
+| options              | TRUE     | google.maps.MapOptions         |                           | [MapOptions object](https://developers.google.com/maps/documentation/javascript/reference/map#MapOptions)                 |
+| markers              | FALSE    | google.maps.MarkerOptions[]    | []                        | [MarkerOptions object](https://developers.google.com/maps/documentation/javascript/reference/marker#MarkerOptions)        |
+| polylines            | FALSE    | google.maps.PolylineOptions[]  | []                        | [PolylineOptions object](https://developers.google.com/maps/documentation/javascript/reference/polygon#PolylineOptions)   |
+| polygons             | FALSE    | google.maps.PolygonOptions[]   | []                        | [PolygonOptions object](https://developers.google.com/maps/documentation/javascript/reference/polygon#PolygonOptions)     |
+| circles              | FALSE    | google.maps.CircleOptions[]    | []                        | [CircleOptions object](https://developers.google.com/maps/documentation/javascript/reference/polygon#CircleOptions)       |
+| rectangles           | FALSE    | google.maps.RectangleOptions[] | []                        | [RectangleOptions object](https://developers.google.com/maps/documentation/javascript/reference/polygon#RectangleOptions) |
 
 ## Events
 

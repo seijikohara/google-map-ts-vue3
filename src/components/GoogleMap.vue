@@ -3,6 +3,7 @@
 
 export type Props = {
   apiKey: string
+  scriptLoadingTimeout?: number
   libraries: string
   height?: string
   width?: string
@@ -15,13 +16,14 @@ export type Props = {
 }
 </script>
 
-<script lang="ts" setup>
+<script setup lang="ts">
 /// <reference types="google.maps" />
 
 import { ref, onMounted, watch } from 'vue'
 import { loadGoogleMapsScript } from './GoogleMapLoader'
 
 const props = withDefaults(defineProps<Props>(), {
+  scriptLoadingTimeout: 5000,
   height: '500px',
   width: '500px',
   markers: () => [],
@@ -106,10 +108,13 @@ onMounted(async () => {
   if (!googleMapRef.value) throw new Error('googleMapRef is undefined')
 
   try {
-    await loadGoogleMapsScript({
-      key: props.apiKey,
-      libraries: props.libraries
-    })
+    await loadGoogleMapsScript(
+      {
+        key: props.apiKey,
+        libraries: props.libraries
+      },
+      props.scriptLoadingTimeout
+    )
 
     const mapElement = googleMapRef.value as HTMLElement
     if (!mapElement) throw new Error("[GoogleMap] Failed to reference 'mapElement'")
