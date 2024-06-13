@@ -4,11 +4,11 @@
 export type Props = {
   apiKey: string
   scriptLoadingTimeout?: number
-  libraries: string
+  libraries?: string
   height?: string
   width?: string
   options: google.maps.MapOptions
-  markers?: google.maps.MarkerOptions[]
+  markers?: google.maps.marker.AdvancedMarkerElementOptions[]
   polylines?: google.maps.PolylineOptions[]
   polygons?: google.maps.PolygonOptions[]
   circles?: google.maps.CircleOptions[]
@@ -44,7 +44,7 @@ const emit = defineEmits([
 
 const googleMapInstances = {
   map: {} as google.maps.Map,
-  markers: [] as google.maps.Marker[],
+  markers: [] as google.maps.marker.AdvancedMarkerElement[],
   polylines: [] as google.maps.Polyline[],
   polygons: [] as google.maps.Polygon[],
   circles: [] as google.maps.Circle[],
@@ -59,9 +59,11 @@ const createMap = (mapElement: HTMLElement, option: google.maps.MapOptions): goo
 
 const createMarkers = (
   map: google.maps.Map,
-  options: google.maps.MarkerOptions[]
-): google.maps.Marker[] => {
-  const markers = options.map((option) => new google.maps.Marker({ ...option, map: map }))
+  options: google.maps.marker.AdvancedMarkerElementOptions[]
+): google.maps.marker.AdvancedMarkerElement[] => {
+  const markers = options.map(
+    (option) => new google.maps.marker.AdvancedMarkerElement({ ...option, map: map })
+  )
   emit('markers-created', markers)
   return markers
 }
@@ -111,7 +113,7 @@ onMounted(async () => {
     await loadGoogleMapsScript(
       {
         key: props.apiKey,
-        libraries: props.libraries
+        libraries: props.libraries ?? 'marker,geometry,drawing,places'
       },
       props.scriptLoadingTimeout
     )
@@ -137,7 +139,7 @@ watch(
 watch(
   () => props.markers,
   (value) => {
-    googleMapInstances.markers.forEach((marker) => marker.setMap(null))
+    googleMapInstances.markers.forEach((marker) => (marker.map = null))
     googleMapInstances.markers = createMarkers(googleMapInstances.map, value)
   }
 )

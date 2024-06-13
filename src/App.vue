@@ -12,20 +12,19 @@ defineOptions({
 const apiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY
 const options = {
   center: { lat: 35.1, lng: 135.1 },
-  zoom: 5
+  zoom: 5,
+  mapId: 'DEMO_MAP_ID' // Map ID is required for advanced markers.
 } as google.maps.MapOptions
 const markers = [
   {
     position: { lat: 35.1, lng: 135.1 },
-    title: 'position1',
-    draggable: false
+    title: 'position1'
   },
   {
     position: { lat: 37.1, lng: 139.1 },
-    title: 'position2',
-    draggable: false
+    title: 'position2'
   }
-] as google.maps.MarkerOptions[]
+] as google.maps.marker.AdvancedMarkerElementOptions[]
 const polylines = [
   {
     path: [
@@ -137,7 +136,8 @@ watch(
 )
 
 const onMapCreated = (map: google.maps.Map) => console.log('map: ', map)
-const onMarkersCreated = (markers: google.maps.Marker[]) => console.log('markers: ', markers)
+const onMarkersCreated = (markers: google.maps.marker.AdvancedMarkerElement[]) =>
+  console.log('markers: ', markers)
 const onPolylinesCreated = (polylines: google.maps.Polyline[]) =>
   console.log('polylines: ', polylines)
 const onPolygonsCreated = (polygons: google.maps.Polygon[]) => console.log('polygons: ', polygons)
@@ -149,7 +149,7 @@ const onRectanglesCreated = (rectangles: google.maps.Rectangle[]) =>
 <template>
   <GoogleMap
     :apiKey="apiKey"
-    libraries="geometry,drawing,places"
+    libraries="marker,geometry,drawing,places"
     :options="state.options"
     :markers="state.markers.props"
     :polylines="state.polylines.props"

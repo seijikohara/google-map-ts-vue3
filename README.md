@@ -18,17 +18,16 @@ import { GoogleMap } from "google-map-ts-vue3";
     :options="{
       center: { lat: 35.1, lng: 135.1 },
       zoom: 5,
+      mapId: 'DEMO_MAP_ID' // Map ID is required for advanced markers.
     }"
     :markers="[
-      {
+    {
         position: { lat: 35.1, lng: 135.1 },
-        title: 'position1',
-        draggable: false,
+        title: 'position1'
       },
       {
         position: { lat: 37.1, lng: 139.1 },
-        title: 'position2',
-        draggable: false,
+        title: 'position2'
       },
     ]"
     :polylines="[
@@ -101,24 +100,24 @@ import { GoogleMap } from "google-map-ts-vue3";
 
 ## Props
 
-| Props                | Required | Param Type                     | Default value             | Description                                                                                                               |
-|----------------------|----------|--------------------------------|---------------------------|---------------------------------------------------------------------------------------------------------------------------|
-| apiKey               | TRUE     | string                         |                           | [Google Maps  API Key](https://developers.google.com/maps/documentation/javascript/get-api-key)                           |
-| scriptLoadingTimeout | FALSE    | number                         | 5000                      | Timeout for loading the Google Map script                                                                                 |
-| libraries            | FALSE    | string                         | "geometry,drawing,places" | [Libraries to load](https://developers.google.com/maps/documentation/javascript/libraries)                                |
-| height               | FALSE    | string                         | "500px"                   | The height of Google Maps                                                                                                 |
-| width                | FALSE    | string                         | "500px"                   | The width of Google Maps                                                                                                  |
-| options              | TRUE     | google.maps.MapOptions         |                           | [MapOptions object](https://developers.google.com/maps/documentation/javascript/reference/map#MapOptions)                 |
-| markers              | FALSE    | google.maps.MarkerOptions[]    | []                        | [MarkerOptions object](https://developers.google.com/maps/documentation/javascript/reference/marker#MarkerOptions)        |
-| polylines            | FALSE    | google.maps.PolylineOptions[]  | []                        | [PolylineOptions object](https://developers.google.com/maps/documentation/javascript/reference/polygon#PolylineOptions)   |
-| polygons             | FALSE    | google.maps.PolygonOptions[]   | []                        | [PolygonOptions object](https://developers.google.com/maps/documentation/javascript/reference/polygon#PolygonOptions)     |
-| circles              | FALSE    | google.maps.CircleOptions[]    | []                        | [CircleOptions object](https://developers.google.com/maps/documentation/javascript/reference/polygon#CircleOptions)       |
-| rectangles           | FALSE    | google.maps.RectangleOptions[] | []                        | [RectangleOptions object](https://developers.google.com/maps/documentation/javascript/reference/polygon#RectangleOptions) |
+| Props                | Required | Param Type                                        | Default value                    | Description                                                                                                                                                |
+|----------------------|----------|---------------------------------------------------|----------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| apiKey               | TRUE     | string                                            |                                  | [Google Maps  API Key](https://developers.google.com/maps/documentation/javascript/get-api-key)                                                            |
+| scriptLoadingTimeout | FALSE    | number                                            | 5000                             | Timeout for loading the Google Map script                                                                                                                  |
+| libraries            | FALSE    | string                                            | "marker,geometry,drawing,places" | [Libraries to load](https://developers.google.com/maps/documentation/javascript/libraries)                                                                 |
+| height               | FALSE    | string                                            | "500px"                          | The height of Google Maps                                                                                                                                  |
+| width                | FALSE    | string                                            | "500px"                          | The width of Google Maps                                                                                                                                   |
+| options              | TRUE     | google.maps.MapOptions                            |                                  | [MapOptions object](https://developers.google.com/maps/documentation/javascript/reference/map#MapOptions)                                                  |
+| markers              | FALSE    | google.maps.marker.AdvancedMarkerElementOptions[] | []                               | [AdvancedMarkerElementOptions object](https://developers.google.com/maps/documentation/javascript/reference/advanced-markers#AdvancedMarkerElementOptions) |
+| polylines            | FALSE    | google.maps.PolylineOptions[]                     | []                               | [PolylineOptions object](https://developers.google.com/maps/documentation/javascript/reference/polygon#PolylineOptions)                                    |
+| polygons             | FALSE    | google.maps.PolygonOptions[]                      | []                               | [PolygonOptions object](https://developers.google.com/maps/documentation/javascript/reference/polygon#PolygonOptions)                                      |
+| circles              | FALSE    | google.maps.CircleOptions[]                       | []                               | [CircleOptions object](https://developers.google.com/maps/documentation/javascript/reference/polygon#CircleOptions)                                        |
+| rectangles           | FALSE    | google.maps.RectangleOptions[]                    | []                               | [RectangleOptions object](https://developers.google.com/maps/documentation/javascript/reference/polygon#RectangleOptions)                                  |
 
 ## Events
 
 - map-created(map: [google.maps.Map](https://developers.google.com/maps/documentation/javascript/reference/map#Map))
-- markers-created(markers: [google.maps.Marker[]](https://developers.google.com/maps/documentation/javascript/reference/marker#Marker))
+- markers-created(markers: [google.maps.marker.AdvancedMarkerElement[]](https://developers.google.com/maps/documentation/javascript/reference/advanced-markers#AdvancedMarkerElement))
 - polylines-created(polylines: [google.maps.Polyline[]](https://developers.google.com/maps/documentation/javascript/reference/polygon#Polyline))
 - polygons-created(polygons: [google.maps.Polygon[]](https://developers.google.com/maps/documentation/javascript/reference/polygon#Polygon))
 - circles-created(circles: [google.maps.Circle[]](https://developers.google.com/maps/documentation/javascript/reference/polygon#Circle))
