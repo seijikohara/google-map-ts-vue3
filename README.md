@@ -14,7 +14,6 @@ import { GoogleMap } from "google-map-ts-vue3";
 <template>
   <GoogleMap
     apiKey="your google maps api key"
-    libraries="geometry,drawing,places"
     :options="{
       center: { lat: 35.1, lng: 135.1 },
       zoom: 5,
