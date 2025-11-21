@@ -1,31 +1,34 @@
 <script setup lang="ts">
 /// <reference types="google.maps" />
 
-import { reactive, watch } from 'vue'
-
+import { ref, computed } from 'vue'
 import { GoogleMap } from './components'
 
 defineOptions({
   name: 'App'
 })
 
-const apiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY
+const apiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY as string
+
+// Map ID is required for AdvancedMarkerElement
 const options = {
   center: { lat: 35.1, lng: 135.1 },
   zoom: 5,
-  mapId: 'DEMO_MAP_ID' // Map ID is required for advanced markers.
-} as google.maps.MapOptions
-const markers = [
+  mapId: 'DEMO_MAP_ID'
+} as const satisfies google.maps.MapOptions
+
+const baseMarkers = [
   {
     position: { lat: 35.1, lng: 135.1 },
-    title: 'position1'
+    title: 'Position 1'
   },
   {
     position: { lat: 37.1, lng: 139.1 },
-    title: 'position2'
+    title: 'Position 2'
   }
-] as google.maps.marker.AdvancedMarkerElementOptions[]
-const polylines = [
+] as const satisfies readonly google.maps.marker.AdvancedMarkerElementOptions[]
+
+const basePolylines = [
   {
     path: [
       { lat: 35.1, lng: 135.1 },
@@ -47,8 +50,9 @@ const polylines = [
     strokeOpacity: 1.0,
     strokeWeight: 2
   }
-] as google.maps.PolylineOptions[]
-const polygons = [
+] as const satisfies readonly google.maps.PolylineOptions[]
+
+const basePolygons = [
   {
     paths: [
       { lat: 30, lng: 140 },
@@ -62,125 +66,138 @@ const polygons = [
     fillColor: '#ff0000',
     fillOpacity: 0.35
   }
-] as google.maps.PolygonOptions[]
-const circles = [
+] as const satisfies readonly google.maps.PolygonOptions[]
+
+const baseCircles = [
   {
+    center: { lat: 39.1, lng: 140.1 },
+    radius: 100000,
     strokeColor: '#ff0000',
     strokeOpacity: 0.8,
     strokeWeight: 2,
     fillColor: '#ff0000',
-    fillOpacity: 0.35,
-    center: { lat: 39.1, lng: 140.1 },
-    radius: 100000
+    fillOpacity: 0.35
   }
-] as google.maps.CircleOptions[]
-const rectangles = [
+] as const satisfies readonly google.maps.CircleOptions[]
+
+const baseRectangles = [
   {
-    strokeColor: '#FF0000',
-    strokeOpacity: 0.8,
-    strokeWeight: 2,
-    fillColor: '#FF0000',
-    fillOpacity: 0.35,
     bounds: {
       north: 30,
       south: 33,
       east: 133,
       west: 130
-    }
+    },
+    strokeColor: '#ff0000',
+    strokeOpacity: 0.8,
+    strokeWeight: 2,
+    fillColor: '#ff0000',
+    fillOpacity: 0.35
   }
-] as google.maps.RectangleOptions[]
+] as const satisfies readonly google.maps.RectangleOptions[]
 
-const state = reactive({
-  options,
-  markers: {
-    props: markers,
-    visible: true
-  },
-  polylines: {
-    props: polylines,
-    visible: true
-  },
-  polygons: {
-    props: polygons,
-    visible: true
-  },
-  circles: {
-    props: circles,
-    visible: true
-  },
-  rectangles: {
-    props: rectangles,
-    visible: true
-  }
-})
+const markersVisible = ref(true)
+const polylinesVisible = ref(true)
+const polygonsVisible = ref(true)
+const circlesVisible = ref(true)
+const rectanglesVisible = ref(true)
 
-watch(
-  () => state.markers.visible,
-  (value) => (state.markers.props = value ? markers : [])
-)
-watch(
-  () => state.polylines.visible,
-  (value) => (state.polylines.props = value ? polylines : [])
-)
-watch(
-  () => state.polygons.visible,
-  (value) => (state.polygons.props = value ? polygons : [])
-)
-watch(
-  () => state.circles.visible,
-  (value) => (state.circles.props = value ? circles : [])
-)
-watch(
-  () => state.rectangles.visible,
-  (value) => (state.rectangles.props = value ? rectangles : [])
-)
+const markers = computed(() => (markersVisible.value ? baseMarkers : []))
+const polylines = computed(() => (polylinesVisible.value ? basePolylines : []))
+const polygons = computed(() => (polygonsVisible.value ? basePolygons : []))
+const circles = computed(() => (circlesVisible.value ? baseCircles : []))
+const rectangles = computed(() => (rectanglesVisible.value ? baseRectangles : []))
 
-const onMapCreated = (map: google.maps.Map) => console.log('map: ', map)
-const onMarkersCreated = (markers: google.maps.marker.AdvancedMarkerElement[]) =>
-  console.log('markers: ', markers)
-const onPolylinesCreated = (polylines: google.maps.Polyline[]) =>
-  console.log('polylines: ', polylines)
-const onPolygonsCreated = (polygons: google.maps.Polygon[]) => console.log('polygons: ', polygons)
-const onCirclesCreated = (circles: google.maps.Circle[]) => console.log('circles: ', circles)
-const onRectanglesCreated = (rectangles: google.maps.Rectangle[]) =>
-  console.log('rectangles: ', rectangles)
+const handleMapCreated = (map: google.maps.Map) => {
+  console.log('Map created:', map)
+}
+
+const handleMarkersCreated = (markers: google.maps.marker.AdvancedMarkerElement[]) => {
+  console.log('Markers created:', markers)
+}
+
+const handlePolylinesCreated = (polylines: google.maps.Polyline[]) => {
+  console.log('Polylines created:', polylines)
+}
+
+const handlePolygonsCreated = (polygons: google.maps.Polygon[]) => {
+  console.log('Polygons created:', polygons)
+}
+
+const handleCirclesCreated = (circles: google.maps.Circle[]) => {
+  console.log('Circles created:', circles)
+}
+
+const handleRectanglesCreated = (rectangles: google.maps.Rectangle[]) => {
+  console.log('Rectangles created:', rectangles)
+}
 </script>
 
 <template>
-  <GoogleMap
-    :apiKey="apiKey"
-    libraries="marker,geometry,drawing,places"
-    :options="state.options"
-    :markers="state.markers.props"
-    :polylines="state.polylines.props"
-    :polygons="state.polygons.props"
-    :circles="state.circles.props"
-    :rectangles="state.rectangles.props"
-    @map-created="onMapCreated"
-    @markers-created="onMarkersCreated"
-    @polylines-created="onPolylinesCreated"
-    @polygons-created="onPolygonsCreated"
-    @circles-created="onCirclesCreated"
-    @rectangles-created="onRectanglesCreated"
-  />
-  <label>
-    <input type="checkbox" v-model="state.markers.visible" />
-    Markers
-  </label>
-  <label>
-    <input type="checkbox" v-model="state.polylines.visible" />
-    Polylines
-  </label>
-  <label>
-    <input type="checkbox" v-model="state.polygons.visible" />
-    Polygons
-  </label>
-  <label>
-    <input type="checkbox" v-model="state.circles.visible" />
-    Circles
-  </label>
-  <label>
-    <input type="checkbox" v-model="state.rectangles.visible" />
-    Rectangles
-  </label>
+  <div class="app">
+    <GoogleMap
+      :api-key="apiKey"
+      :options="options"
+      :markers="markers"
+      :polylines="polylines"
+      :polygons="polygons"
+      :circles="circles"
+      :rectangles="rectangles"
+      @map-created="handleMapCreated"
+      @markers-created="handleMarkersCreated"
+      @polylines-created="handlePolylinesCreated"
+      @polygons-created="handlePolygonsCreated"
+      @circles-created="handleCirclesCreated"
+      @rectangles-created="handleRectanglesCreated"
+    />
+    <div class="controls">
+      <label class="control-label">
+        <input v-model="markersVisible" type="checkbox" />
+        Markers
+      </label>
+      <label class="control-label">
+        <input v-model="polylinesVisible" type="checkbox" />
+        Polylines
+      </label>
+      <label class="control-label">
+        <input v-model="polygonsVisible" type="checkbox" />
+        Polygons
+      </label>
+      <label class="control-label">
+        <input v-model="circlesVisible" type="checkbox" />
+        Circles
+      </label>
+      <label class="control-label">
+        <input v-model="rectanglesVisible" type="checkbox" />
+        Rectangles
+      </label>
+    </div>
+  </div>
 </template>
+
+<style scoped>
+.app {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.controls {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.control-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  user-select: none;
+}
+
+.control-label input[type='checkbox'] {
+  cursor: pointer;
+}
+</style>

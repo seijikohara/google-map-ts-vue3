@@ -1,10 +1,24 @@
 # google-map-ts-vue3
 
-[![npm version](https://badge.fury.io/js/google-map-ts-vue3.svg)](https://www.npmjs.com/package/google-map-ts-vue3) [![TypeScript](https://badges.frapsoft.com/typescript/code/typescript.svg?v=101)](https://github.com/ellerbrock/typescript-badges/) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
+[![npm version](https://img.shields.io/npm/v/google-map-ts-vue3.svg)](https://www.npmjs.com/package/google-map-ts-vue3)
+[![CI](https://img.shields.io/github/actions/workflow/status/seijikohara/google-map-ts-vue3/npm-ci.yml?branch=main&label=CI)](https://github.com/seijikohara/google-map-ts-vue3/actions/workflows/npm-ci.yml)
+[![E2E Tests](https://img.shields.io/github/actions/workflow/status/seijikohara/google-map-ts-vue3/playwright.yml?branch=main&label=E2E)](https://github.com/seijikohara/google-map-ts-vue3/actions/workflows/playwright.yml)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.x-blue.svg)](https://www.typescriptlang.org/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-Google Maps component implemented in Vue3.
+A Vue 3 component for integrating Google Maps with full TypeScript support.
 
-## Example
+This library provides a declarative interface for rendering Google Maps with markers, polylines, polygons, circles, and rectangles, utilizing the latest Google Maps JavaScript API features including Advanced Markers.
+
+## Installation
+
+```bash
+npm install google-map-ts-vue3
+```
+
+## Usage
+
+### Basic Example
 
 ```vue
 <script setup lang="ts">
@@ -13,44 +27,52 @@ import { GoogleMap } from "google-map-ts-vue3";
 
 <template>
   <GoogleMap
-    apiKey="your google maps api key"
+    apiKey="YOUR_GOOGLE_MAPS_API_KEY"
     :options="{
       center: { lat: 35.1, lng: 135.1 },
       zoom: 5,
-      mapId: 'DEMO_MAP_ID' // Map ID is required for advanced markers.
+      mapId: 'DEMO_MAP_ID'
+    }"
+  />
+</template>
+```
+
+### Complete Example with Overlays
+
+```vue
+<script setup lang="ts">
+import { GoogleMap } from "google-map-ts-vue3";
+</script>
+
+<template>
+  <GoogleMap
+    apiKey="YOUR_GOOGLE_MAPS_API_KEY"
+    :options="{
+      center: { lat: 35.1, lng: 135.1 },
+      zoom: 5,
+      mapId: 'DEMO_MAP_ID'
     }"
     :markers="[
-    {
+      {
         position: { lat: 35.1, lng: 135.1 },
-        title: 'position1'
+        title: 'Location 1'
       },
       {
         position: { lat: 37.1, lng: 139.1 },
-        title: 'position2'
-      },
+        title: 'Location 2'
+      }
     ]"
     :polylines="[
       {
         path: [
           { lat: 35.1, lng: 135.1 },
-          { lat: 37.1, lng: 139.1 },
+          { lat: 37.1, lng: 139.1 }
         ],
         geodesic: true,
         strokeColor: '#ff0000',
         strokeOpacity: 1.0,
-        strokeWeight: 2,
-      },
-      {
-        path: [
-          { lat: 38.1, lng: 136.1 },
-          { lat: 34.1, lng: 135.1 },
-          { lat: 37.1, lng: 139.1 },
-        ],
-        geodesic: true,
-        strokeColor: '#ffffff',
-        strokeOpacity: 1.0,
-        strokeWeight: 2,
-      },
+        strokeWeight: 2
+      }
     ]"
     :polygons="[
       {
@@ -58,66 +80,112 @@ import { GoogleMap } from "google-map-ts-vue3";
           { lat: 30, lng: 140 },
           { lat: 31, lng: 141 },
           { lat: 30, lng: 145 },
-          { lat: 33, lng: 140 },
+          { lat: 33, lng: 140 }
         ],
         strokeColor: '#ff0000',
         strokeOpacity: 0.8,
         strokeWeight: 3,
         fillColor: '#ff0000',
-        fillOpacity: 0.35,
-      },
+        fillOpacity: 0.35
+      }
     ]"
     :circles="[
       {
+        center: { lat: 39.1, lng: 140.1 },
+        radius: 100000,
         strokeColor: '#ff0000',
         strokeOpacity: 0.8,
         strokeWeight: 2,
         fillColor: '#ff0000',
-        fillOpacity: 0.35,
-        center: { lat: 39.1, lng: 140.1 },
-        radius: 100000,
-      },
+        fillOpacity: 0.35
+      }
     ]"
     :rectangles="[
       {
-        strokeColor: '#ff0000',
-        strokeOpacity: 0.8,
-        strokeWeight: 2,
-        fillColor: '#ff0000',
-        fillOpacity: 0.35,
         bounds: {
           north: 30,
           south: 33,
           east: 133,
-          west: 130,
+          west: 130
         },
-      },
+        strokeColor: '#ff0000',
+        strokeOpacity: 0.8,
+        strokeWeight: 2,
+        fillColor: '#ff0000',
+        fillOpacity: 0.35
+      }
     ]"
   />
 </template>
 ```
 
-## Props
+## API Reference
 
-| Props                | Required | Param Type                                        | Default value                    | Description                                                                                                                                                |
-|----------------------|----------|---------------------------------------------------|----------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| apiKey               | TRUE     | string                                            |                                  | [Google Maps  API Key](https://developers.google.com/maps/documentation/javascript/get-api-key)                                                            |
-| scriptLoadingTimeout | FALSE    | number                                            | 5000                             | Timeout for loading the Google Map script                                                                                                                  |
-| libraries            | FALSE    | string                                            | "marker,geometry,drawing,places" | [Libraries to load](https://developers.google.com/maps/documentation/javascript/libraries)                                                                 |
-| height               | FALSE    | string                                            | "500px"                          | The height of Google Maps                                                                                                                                  |
-| width                | FALSE    | string                                            | "500px"                          | The width of Google Maps                                                                                                                                   |
-| options              | TRUE     | google.maps.MapOptions                            |                                  | [MapOptions object](https://developers.google.com/maps/documentation/javascript/reference/map#MapOptions)                                                  |
-| markers              | FALSE    | google.maps.marker.AdvancedMarkerElementOptions[] | []                               | [AdvancedMarkerElementOptions object](https://developers.google.com/maps/documentation/javascript/reference/advanced-markers#AdvancedMarkerElementOptions) |
-| polylines            | FALSE    | google.maps.PolylineOptions[]                     | []                               | [PolylineOptions object](https://developers.google.com/maps/documentation/javascript/reference/polygon#PolylineOptions)                                    |
-| polygons             | FALSE    | google.maps.PolygonOptions[]                      | []                               | [PolygonOptions object](https://developers.google.com/maps/documentation/javascript/reference/polygon#PolygonOptions)                                      |
-| circles              | FALSE    | google.maps.CircleOptions[]                       | []                               | [CircleOptions object](https://developers.google.com/maps/documentation/javascript/reference/polygon#CircleOptions)                                        |
-| rectangles           | FALSE    | google.maps.RectangleOptions[]                    | []                               | [RectangleOptions object](https://developers.google.com/maps/documentation/javascript/reference/polygon#RectangleOptions)                                  |
+### Props
 
-## Events
+| Property               | Type                                                | Required | Default                          | Description                                                                                                                                               |
+|------------------------|-----------------------------------------------------|----------|----------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `apiKey`               | `string`                                            | Yes      | -                                | Google Maps API key. Obtain from [Google Cloud Console](https://developers.google.com/maps/documentation/javascript/get-api-key)                         |
+| `options`              | `google.maps.MapOptions`                            | Yes      | -                                | Map configuration options. See [MapOptions](https://developers.google.com/maps/documentation/javascript/reference/map#MapOptions)                         |
+| `markers`              | `google.maps.marker.AdvancedMarkerElementOptions[]` | No       | `[]`                             | Array of advanced marker configurations. See [AdvancedMarkerElementOptions](https://developers.google.com/maps/documentation/javascript/reference/advanced-markers#AdvancedMarkerElementOptions) |
+| `polylines`            | `google.maps.PolylineOptions[]`                     | No       | `[]`                             | Array of polyline configurations. See [PolylineOptions](https://developers.google.com/maps/documentation/javascript/reference/polygon#PolylineOptions)    |
+| `polygons`             | `google.maps.PolygonOptions[]`                      | No       | `[]`                             | Array of polygon configurations. See [PolygonOptions](https://developers.google.com/maps/documentation/javascript/reference/polygon#PolygonOptions)       |
+| `circles`              | `google.maps.CircleOptions[]`                       | No       | `[]`                             | Array of circle configurations. See [CircleOptions](https://developers.google.com/maps/documentation/javascript/reference/polygon#CircleOptions)          |
+| `rectangles`           | `google.maps.RectangleOptions[]`                    | No       | `[]`                             | Array of rectangle configurations. See [RectangleOptions](https://developers.google.com/maps/documentation/javascript/reference/polygon#RectangleOptions) |
+| `height`               | `string`                                            | No       | `"500px"`                        | Height of the map container                                                                                                                               |
+| `width`                | `string`                                            | No       | `"500px"`                        | Width of the map container                                                                                                                                |
+| `libraries`            | `string`                                            | No       | `"marker,geometry,drawing,places"` | Comma-separated list of Google Maps libraries to load. See [Libraries](https://developers.google.com/maps/documentation/javascript/libraries)            |
+| `scriptLoadingTimeout` | `number`                                            | No       | `5000`                           | Timeout in milliseconds for loading the Google Maps JavaScript API                                                                                        |
 
-- map-created(map: [google.maps.Map](https://developers.google.com/maps/documentation/javascript/reference/map#Map))
-- markers-created(markers: [google.maps.marker.AdvancedMarkerElement[]](https://developers.google.com/maps/documentation/javascript/reference/advanced-markers#AdvancedMarkerElement))
-- polylines-created(polylines: [google.maps.Polyline[]](https://developers.google.com/maps/documentation/javascript/reference/polygon#Polyline))
-- polygons-created(polygons: [google.maps.Polygon[]](https://developers.google.com/maps/documentation/javascript/reference/polygon#Polygon))
-- circles-created(circles: [google.maps.Circle[]](https://developers.google.com/maps/documentation/javascript/reference/polygon#Circle))
-- rectangles-created(rectangles: [google.maps.Rectangle[]](https://developers.google.com/maps/documentation/javascript/reference/polygon#Rectangle))
+### Events
+
+The component emits the following events when Google Maps objects are created, providing access to the underlying API instances:
+
+| Event                | Payload Type                                                                                                                                      | Description                                  |
+|----------------------|---------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------|
+| `map-created`        | [`google.maps.Map`](https://developers.google.com/maps/documentation/javascript/reference/map#Map)                                                | Emitted when the map instance is created     |
+| `markers-created`    | [`google.maps.marker.AdvancedMarkerElement[]`](https://developers.google.com/maps/documentation/javascript/reference/advanced-markers#AdvancedMarkerElement) | Emitted when marker instances are created    |
+| `polylines-created`  | [`google.maps.Polyline[]`](https://developers.google.com/maps/documentation/javascript/reference/polygon#Polyline)                                | Emitted when polyline instances are created  |
+| `polygons-created`   | [`google.maps.Polygon[]`](https://developers.google.com/maps/documentation/javascript/reference/polygon#Polygon)                                  | Emitted when polygon instances are created   |
+| `circles-created`    | [`google.maps.Circle[]`](https://developers.google.com/maps/documentation/javascript/reference/polygon#Circle)                                    | Emitted when circle instances are created    |
+| `rectangles-created` | [`google.maps.Rectangle[]`](https://developers.google.com/maps/documentation/javascript/reference/polygon#Rectangle)                              | Emitted when rectangle instances are created |
+
+### Event Usage Example
+
+```vue
+<script setup lang="ts">
+import { GoogleMap } from "google-map-ts-vue3";
+
+const handleMapCreated = (map: google.maps.Map) => {
+  console.log("Map instance:", map);
+};
+
+const handleMarkersCreated = (markers: google.maps.marker.AdvancedMarkerElement[]) => {
+  console.log("Marker instances:", markers);
+};
+</script>
+
+<template>
+  <GoogleMap
+    apiKey="YOUR_GOOGLE_MAPS_API_KEY"
+    :options="{ center: { lat: 35.1, lng: 135.1 }, zoom: 5, mapId: 'DEMO_MAP_ID' }"
+    :markers="[{ position: { lat: 35.1, lng: 135.1 }, title: 'Marker' }]"
+    @map-created="handleMapCreated"
+    @markers-created="handleMarkersCreated"
+  />
+</template>
+```
+
+## Important Notes
+
+### Map ID Requirement
+
+The `mapId` property is **required** in `options` when using Advanced Markers (the default marker type). Create a Map ID in the [Google Cloud Console](https://console.cloud.google.com/google/maps-apis/studio/maps).
+
+### TypeScript Support
+
+This library includes full TypeScript type definitions from `@types/google.maps`, providing comprehensive type safety and IDE autocomplete for all Google Maps API features.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
