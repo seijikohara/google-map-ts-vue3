@@ -1,25 +1,17 @@
 import { fileURLToPath, URL } from 'node:url'
-
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 
 const name = 'google-map-ts-vue3'
 
-// https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [
-    vue(),
-  ],
-  resolve: {
-    alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url))
-    }
-  },
+  plugins: [vue()],
   build: {
     lib: {
-      entry: 'src/components/index.ts',
+      entry: fileURLToPath(new URL('./src/components/index.ts', import.meta.url)),
       name,
-      fileName: (format) => `${name}.${format}.js`
+      formats: ['es', 'umd'],
+      fileName: (format) => (format === 'es' ? `${name}.js` : `${name}.${format}.cjs`)
     },
     sourcemap: true,
     rollupOptions: {
@@ -30,5 +22,5 @@ export default defineConfig({
         }
       }
     }
-  },
+  }
 })
