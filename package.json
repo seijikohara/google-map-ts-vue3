@@ -1,6 +1,6 @@
 {
   "name": "google-map-ts-vue3",
-  "version": "1.3.0",
+  "version": "2.0.0",
   "description": "Google Map Vue3 Component",
   "packageManager": "pnpm@11.11.0",
   "devEngines": {
@@ -27,57 +27,54 @@
   },
   "homepage": "https://github.com/seijikohara/google-map-ts-vue3#readme",
   "type": "module",
-  "main": "./dist/google-map-ts-vue3.umd.cjs",
-  "module": "./dist/google-map-ts-vue3.js",
-  "types": "./dist/src/components/index.d.ts",
+  "main": "./dist/google-map-ts-vue3.js",
+  "types": "./dist/index.d.ts",
   "files": [
     "dist"
   ],
+  "sideEffects": false,
   "exports": {
     ".": {
-      "import": {
-        "types": "./dist/src/components/index.d.ts",
-        "default": "./dist/google-map-ts-vue3.js"
-      },
-      "require": {
-        "types": "./dist/src/components/index.d.ts",
-        "default": "./dist/google-map-ts-vue3.umd.cjs"
-      }
-    }
+      "types": "./dist/index.d.ts",
+      "default": "./dist/google-map-ts-vue3.js"
+    },
+    "./package.json": "./package.json"
   },
   "scripts": {
     "dev": "vite",
-    "build": "vite build && vue-tsc --emitDeclarationOnly",
+    "build": "vite build",
+    "typecheck": "vue-tsc --noEmit",
+    "check:package": "publint && pnpm pack --out package.tgz && (pnpm exec attw package.tgz --profile esm-only; code=$?; rm -f package.tgz; exit $code)",
     "preview": "vite preview",
     "lint": "eslint .",
     "format": "prettier --write src/",
     "deps:update": "taze -w && pnpm install",
-    "deps:check": "taze",
-    "test:e2e": "playwright test",
-    "test:e2e:ui": "playwright test --ui",
-    "test:e2e:headed": "playwright test --headed",
-    "test:e2e:debug": "playwright test --debug",
-    "test:e2e:report": "playwright show-report"
+    "deps:check": "taze"
   },
   "dependencies": {
     "@types/google.maps": "^3.58.1"
   },
   "devDependencies": {
+    "@arethetypeswrong/cli": "^0.18.5",
+    "@microsoft/api-extractor": "^7.58.9",
     "@playwright/test": "1.61.1",
     "@types/node": "^26.0.0",
     "@vitejs/plugin-vue": "6.0.7",
     "@vue/eslint-config-prettier": "10.2.0",
     "@vue/eslint-config-typescript": "14.9.0",
+    "@vue/language-core": "^3.3.7",
     "@vue/tsconfig": "0.9.1",
     "eslint": "^10.0.2",
     "eslint-plugin-prettier": "^5.5.4",
     "eslint-plugin-vue": "^10.5.1",
     "prettier": "^3.6.2",
+    "publint": "^0.3.21",
     "taze": "^19.14.1",
-    "typescript": "^6.0.2",
-    "vite": "^8.0.0",
+    "typescript": "^6.0.3",
+    "vite": "^8.1.4",
+    "vite-plugin-dts": "^5.0.3",
     "vue": "^3.5.39",
-    "vue-tsc": "3.3.6"
+    "vue-tsc": "3.3.7"
   },
   "peerDependencies": {
     "vue": ">=3.2.0"
