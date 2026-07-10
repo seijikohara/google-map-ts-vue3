@@ -2,8 +2,8 @@
 
 [![npm version](https://img.shields.io/npm/v/google-map-ts-vue3.svg)](https://www.npmjs.com/package/google-map-ts-vue3)
 [![CI](https://img.shields.io/github/actions/workflow/status/seijikohara/google-map-ts-vue3/npm-ci.yml?branch=main&label=CI)](https://github.com/seijikohara/google-map-ts-vue3/actions/workflows/npm-ci.yml)
-[![E2E Tests](https://img.shields.io/github/actions/workflow/status/seijikohara/google-map-ts-vue3/playwright.yml?branch=main&label=E2E)](https://github.com/seijikohara/google-map-ts-vue3/actions/workflows/playwright.yml)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.x-blue.svg)](https://www.typescriptlang.org/)
+[![Browser Tests](https://img.shields.io/github/actions/workflow/status/seijikohara/google-map-ts-vue3/browser-tests.yml?branch=main&label=Browser%20Tests)](https://github.com/seijikohara/google-map-ts-vue3/actions/workflows/browser-tests.yml)
+[![TypeScript](https://img.shields.io/badge/TypeScript-6.0.3-blue.svg)](https://www.typescriptlang.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 A Vue 3 component for integrating Google Maps with full TypeScript support.
@@ -15,6 +15,9 @@ This library provides a declarative interface for rendering Google Maps with mar
 ```bash
 npm install google-map-ts-vue3
 ```
+
+> `google-map-ts-vue3` v2 is an ESM-only package. Use `import` syntax; on
+> CommonJS, Node.js >= 20.19 can load it via `require()` (require(esm)).
 
 ## Usage
 
