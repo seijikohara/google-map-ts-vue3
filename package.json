@@ -39,7 +39,7 @@
     "typecheck": "vue-tsc --noEmit",
     "test": "vitest run --project=chromium",
     "test:watch": "vitest --project=chromium",
-    "check:package": "publint && pnpm pack --out package.tgz && (pnpm exec attw package.tgz --profile esm-only; code=$?; rm -f package.tgz; exit $code)",
+    "check:package": "node scripts/check-package.mjs",
     "preview": "vite preview",
     "lint": "oxlint && eslint .",
     "lint:fix": "oxlint --fix && eslint . --fix",
