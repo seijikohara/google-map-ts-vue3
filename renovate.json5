@@ -53,7 +53,14 @@
     {
       description: 'Group the build toolchain',
       groupName: 'build toolchain',
-      matchPackageNames: ['vite', 'vite-plugin-*', 'typescript', 'sass']
+      matchPackageNames: [
+        'vite',
+        'vite-plugin-*',
+        'typescript',
+        'sass',
+        '@microsoft/api-extractor',
+        '@vue/language-core'
+      ]
     },
     {
       description: 'Group linting and formatting tools',
@@ -63,14 +70,22 @@
         '@eslint/*',
         'eslint-plugin-*',
         'eslint-config-*',
-        'prettier',
-        'typescript-eslint'
+        '@typescript-eslint/*',
+        'vue-eslint-parser',
+        'oxlint',
+        'oxfmt'
       ]
     },
     {
-      description: 'Group Playwright packages',
-      groupName: 'playwright',
-      matchPackageNames: ['playwright', '@playwright/*']
+      description: 'Group the test toolchain',
+      groupName: 'testing',
+      matchPackageNames: [
+        'vitest',
+        '@vitest/*',
+        'vitest-browser-vue',
+        'playwright',
+        '@playwright/*'
+      ]
     },
     {
       description: 'Group TypeScript type definitions',
