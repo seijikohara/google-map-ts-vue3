@@ -1,29 +1,40 @@
+import vueEslintParser from 'vue-eslint-parser'
+import tsParser from '@typescript-eslint/parser'
 import pluginVue from 'eslint-plugin-vue'
-import { defineConfigWithVueTs, vueTsConfigs } from '@vue/eslint-config-typescript'
-import pluginPrettierRecommended from 'eslint-plugin-prettier/recommended'
+import oxlint from 'eslint-plugin-oxlint'
 
-export default defineConfigWithVueTs(
+const vueEssential = pluginVue.configs['flat/essential'].map((config) => ({
+  ...config,
+  files: ['**/*.vue']
+}))
+
+export default [
   {
     name: 'app/files-to-ignore',
     ignores: ['**/dist/**', '**/dist-ssr/**', '**/coverage/**']
   },
 
-  pluginVue.configs['flat/essential'],
-  vueTsConfigs.recommended,
+  ...vueEssential,
 
-  pluginPrettierRecommended,
+  {
+    name: 'app/vue-typescript-parser',
+    files: ['**/*.vue'],
+    languageOptions: {
+      parser: vueEslintParser,
+      parserOptions: {
+        parser: tsParser,
+        extraFileExtensions: ['.vue']
+      }
+    }
+  },
 
   {
     name: 'app/custom-rules',
+    files: ['**/*.vue'],
     rules: {
-      'vue/multi-word-component-names': 'warn',
-      '@typescript-eslint/no-unused-vars': [
-        'warn',
-        {
-          argsIgnorePattern: '^_',
-          varsIgnorePattern: '^_'
-        }
-      ]
+      'vue/multi-word-component-names': 'warn'
     }
-  }
-)
+  },
+
+  ...oxlint.buildFromOxlintConfigFile('./.oxlintrc.json')
+]

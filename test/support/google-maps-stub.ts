@@ -42,6 +42,7 @@ export function installGoogleMapsStub(): GoogleMapsStub {
     this.map = options.map
   })
 
+  // oxlint-disable-next-line unicorn/consistent-function-scoping -- factory is intentionally colocated with the four constructor-mock assignments it creates, for readability in this test-only helper; it has no closure captures, so hoisting would be safe but is out of scope for this lint-toolchain swap.
   const createOverlayCtor = () =>
     vi.fn(function (this: Record<string, unknown>) {
       this.setMap = vi.fn()
