@@ -22,7 +22,7 @@ npm install google-map-ts-vue3
 
 ```vue
 <script setup lang="ts">
-import { GoogleMap } from "google-map-ts-vue3";
+import { GoogleMap } from 'google-map-ts-vue3'
 </script>
 
 <template>
@@ -41,7 +41,7 @@ import { GoogleMap } from "google-map-ts-vue3";
 
 ```vue
 <script setup lang="ts">
-import { GoogleMap } from "google-map-ts-vue3";
+import { GoogleMap } from 'google-map-ts-vue3'
 </script>
 
 <template>
@@ -123,46 +123,46 @@ import { GoogleMap } from "google-map-ts-vue3";
 
 ### Props
 
-| Property               | Type                                                | Required | Default                          | Description                                                                                                                                               |
-|------------------------|-----------------------------------------------------|----------|----------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `apiKey`               | `string`                                            | Yes      | -                                | Google Maps API key. Obtain from [Google Cloud Console](https://developers.google.com/maps/documentation/javascript/get-api-key)                         |
-| `options`              | `google.maps.MapOptions`                            | Yes      | -                                | Map configuration options. See [MapOptions](https://developers.google.com/maps/documentation/javascript/reference/map#MapOptions)                         |
-| `markers`              | `google.maps.marker.AdvancedMarkerElementOptions[]` | No       | `[]`                             | Array of advanced marker configurations. See [AdvancedMarkerElementOptions](https://developers.google.com/maps/documentation/javascript/reference/advanced-markers#AdvancedMarkerElementOptions) |
-| `polylines`            | `google.maps.PolylineOptions[]`                     | No       | `[]`                             | Array of polyline configurations. See [PolylineOptions](https://developers.google.com/maps/documentation/javascript/reference/polygon#PolylineOptions)    |
-| `polygons`             | `google.maps.PolygonOptions[]`                      | No       | `[]`                             | Array of polygon configurations. See [PolygonOptions](https://developers.google.com/maps/documentation/javascript/reference/polygon#PolygonOptions)       |
-| `circles`              | `google.maps.CircleOptions[]`                       | No       | `[]`                             | Array of circle configurations. See [CircleOptions](https://developers.google.com/maps/documentation/javascript/reference/polygon#CircleOptions)          |
-| `rectangles`           | `google.maps.RectangleOptions[]`                    | No       | `[]`                             | Array of rectangle configurations. See [RectangleOptions](https://developers.google.com/maps/documentation/javascript/reference/polygon#RectangleOptions) |
-| `height`               | `string`                                            | No       | `"500px"`                        | Height of the map container                                                                                                                               |
-| `width`                | `string`                                            | No       | `"500px"`                        | Width of the map container                                                                                                                                |
-| `libraries`            | `string`                                            | No       | `"marker,geometry,drawing,places"` | Comma-separated list of Google Maps libraries to load. See [Libraries](https://developers.google.com/maps/documentation/javascript/libraries)            |
-| `scriptLoadingTimeout` | `number`                                            | No       | `5000`                           | Timeout in milliseconds for loading the Google Maps JavaScript API                                                                                        |
+| Property               | Type                                                | Required | Default                            | Description                                                                                                                                                                                      |
+| ---------------------- | --------------------------------------------------- | -------- | ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `apiKey`               | `string`                                            | Yes      | -                                  | Google Maps API key. Obtain from [Google Cloud Console](https://developers.google.com/maps/documentation/javascript/get-api-key)                                                                 |
+| `options`              | `google.maps.MapOptions`                            | Yes      | -                                  | Map configuration options. See [MapOptions](https://developers.google.com/maps/documentation/javascript/reference/map#MapOptions)                                                                |
+| `markers`              | `google.maps.marker.AdvancedMarkerElementOptions[]` | No       | `[]`                               | Array of advanced marker configurations. See [AdvancedMarkerElementOptions](https://developers.google.com/maps/documentation/javascript/reference/advanced-markers#AdvancedMarkerElementOptions) |
+| `polylines`            | `google.maps.PolylineOptions[]`                     | No       | `[]`                               | Array of polyline configurations. See [PolylineOptions](https://developers.google.com/maps/documentation/javascript/reference/polygon#PolylineOptions)                                           |
+| `polygons`             | `google.maps.PolygonOptions[]`                      | No       | `[]`                               | Array of polygon configurations. See [PolygonOptions](https://developers.google.com/maps/documentation/javascript/reference/polygon#PolygonOptions)                                              |
+| `circles`              | `google.maps.CircleOptions[]`                       | No       | `[]`                               | Array of circle configurations. See [CircleOptions](https://developers.google.com/maps/documentation/javascript/reference/polygon#CircleOptions)                                                 |
+| `rectangles`           | `google.maps.RectangleOptions[]`                    | No       | `[]`                               | Array of rectangle configurations. See [RectangleOptions](https://developers.google.com/maps/documentation/javascript/reference/polygon#RectangleOptions)                                        |
+| `height`               | `string`                                            | No       | `"500px"`                          | Height of the map container                                                                                                                                                                      |
+| `width`                | `string`                                            | No       | `"500px"`                          | Width of the map container                                                                                                                                                                       |
+| `libraries`            | `string`                                            | No       | `"marker,geometry,drawing,places"` | Comma-separated list of Google Maps libraries to load. See [Libraries](https://developers.google.com/maps/documentation/javascript/libraries)                                                    |
+| `scriptLoadingTimeout` | `number`                                            | No       | `5000`                             | Timeout in milliseconds for loading the Google Maps JavaScript API                                                                                                                               |
 
 ### Events
 
 The component emits the following events when Google Maps objects are created, providing access to the underlying API instances:
 
-| Event                | Payload Type                                                                                                                                      | Description                                  |
-|----------------------|---------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------|
-| `map-created`        | [`google.maps.Map`](https://developers.google.com/maps/documentation/javascript/reference/map#Map)                                                | Emitted when the map instance is created     |
+| Event                | Payload Type                                                                                                                                                 | Description                                  |
+| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------- |
+| `map-created`        | [`google.maps.Map`](https://developers.google.com/maps/documentation/javascript/reference/map#Map)                                                           | Emitted when the map instance is created     |
 | `markers-created`    | [`google.maps.marker.AdvancedMarkerElement[]`](https://developers.google.com/maps/documentation/javascript/reference/advanced-markers#AdvancedMarkerElement) | Emitted when marker instances are created    |
-| `polylines-created`  | [`google.maps.Polyline[]`](https://developers.google.com/maps/documentation/javascript/reference/polygon#Polyline)                                | Emitted when polyline instances are created  |
-| `polygons-created`   | [`google.maps.Polygon[]`](https://developers.google.com/maps/documentation/javascript/reference/polygon#Polygon)                                  | Emitted when polygon instances are created   |
-| `circles-created`    | [`google.maps.Circle[]`](https://developers.google.com/maps/documentation/javascript/reference/polygon#Circle)                                    | Emitted when circle instances are created    |
-| `rectangles-created` | [`google.maps.Rectangle[]`](https://developers.google.com/maps/documentation/javascript/reference/polygon#Rectangle)                              | Emitted when rectangle instances are created |
+| `polylines-created`  | [`google.maps.Polyline[]`](https://developers.google.com/maps/documentation/javascript/reference/polygon#Polyline)                                           | Emitted when polyline instances are created  |
+| `polygons-created`   | [`google.maps.Polygon[]`](https://developers.google.com/maps/documentation/javascript/reference/polygon#Polygon)                                             | Emitted when polygon instances are created   |
+| `circles-created`    | [`google.maps.Circle[]`](https://developers.google.com/maps/documentation/javascript/reference/polygon#Circle)                                               | Emitted when circle instances are created    |
+| `rectangles-created` | [`google.maps.Rectangle[]`](https://developers.google.com/maps/documentation/javascript/reference/polygon#Rectangle)                                         | Emitted when rectangle instances are created |
 
 ### Event Usage Example
 
 ```vue
 <script setup lang="ts">
-import { GoogleMap } from "google-map-ts-vue3";
+import { GoogleMap } from 'google-map-ts-vue3'
 
 const handleMapCreated = (map: google.maps.Map) => {
-  console.log("Map instance:", map);
-};
+  console.log('Map instance:', map)
+}
 
 const handleMarkersCreated = (markers: google.maps.marker.AdvancedMarkerElement[]) => {
-  console.log("Marker instances:", markers);
-};
+  console.log('Marker instances:', markers)
+}
 </script>
 
 <template>

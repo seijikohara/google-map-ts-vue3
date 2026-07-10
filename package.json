@@ -2,37 +2,29 @@
   "name": "google-map-ts-vue3",
   "version": "2.0.0",
   "description": "Google Map Vue3 Component",
-  "packageManager": "pnpm@11.11.0",
-  "devEngines": {
-    "packageManager": {
-      "name": "pnpm",
-      "version": "11.11.0",
-      "onFail": "download"
-    }
+  "keywords": [
+    "google",
+    "maps",
+    "typescript",
+    "vue3"
+  ],
+  "homepage": "https://github.com/seijikohara/google-map-ts-vue3#readme",
+  "bugs": {
+    "url": "https://github.com/seijikohara/google-map-ts-vue3/issues"
   },
+  "license": "MIT",
+  "author": "Seiji Kohara <sage.0118@gmail.com> (https://github.com/seijikohara)",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/seijikohara/google-map-ts-vue3.git"
   },
-  "keywords": [
-    "google",
-    "maps",
-    "vue3",
-    "typescript"
-  ],
-  "author": "Seiji Kohara <sage.0118@gmail.com> (https://github.com/seijikohara)",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/seijikohara/google-map-ts-vue3/issues"
-  },
-  "homepage": "https://github.com/seijikohara/google-map-ts-vue3#readme",
-  "type": "module",
-  "main": "./dist/google-map-ts-vue3.js",
-  "types": "./dist/index.d.ts",
   "files": [
     "dist"
   ],
+  "type": "module",
   "sideEffects": false,
+  "main": "./dist/google-map-ts-vue3.js",
+  "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
@@ -86,5 +78,13 @@
   },
   "peerDependencies": {
     "vue": ">=3.2.0"
-  }
+  },
+  "devEngines": {
+    "packageManager": {
+      "name": "pnpm",
+      "version": "11.11.0",
+      "onFail": "download"
+    }
+  },
+  "packageManager": "pnpm@11.11.0"
 }

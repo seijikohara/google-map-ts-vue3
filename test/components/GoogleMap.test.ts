@@ -59,9 +59,8 @@ describe('GoogleMap', () => {
       map: stub.mapCtor.mock.instances[0]
     })
 
-    const markersCreatedEvents = emitted<[google.maps.marker.AdvancedMarkerElement[]]>(
-      'markers-created'
-    )
+    const markersCreatedEvents =
+      emitted<[google.maps.marker.AdvancedMarkerElement[]]>('markers-created')
     expect(markersCreatedEvents).toHaveLength(1)
     expect(markersCreatedEvents?.[0][0]).toEqual(stub.advancedMarkerElementCtor.mock.instances)
   })

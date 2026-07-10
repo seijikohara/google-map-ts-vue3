@@ -29,11 +29,11 @@ export interface GoogleMapsStub {
  * each test starts with fresh, uncontaminated mock call history.
  */
 export function installGoogleMapsStub(): GoogleMapsStub {
-  const mapCtor = vi.fn<(...args: MapConstructorArgs) => void>(function (
-    this: Record<string, unknown>
-  ) {
-    this.setOptions = vi.fn()
-  })
+  const mapCtor = vi.fn<(...args: MapConstructorArgs) => void>(
+    function (this: Record<string, unknown>) {
+      this.setOptions = vi.fn()
+    }
+  )
 
   const advancedMarkerElementCtor = vi.fn(function (
     this: Record<string, unknown>,
