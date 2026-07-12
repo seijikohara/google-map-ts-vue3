@@ -6,34 +6,41 @@
 // propagating whichever step's exit code failed. A try/finally cleans
 // up the tarball if pack or attw fails; a leading cleanup also clears
 // any tarball left by an interrupted prior run, so the guarantee holds
-// even when publint itself fails early.
+// even when publint itself fails early. The run() helper also logs
+// spawnSync's `.error`, so a step that fails to start (rather than
+// exiting non-zero) reports its root cause instead of just a generic
+// exit code.
 import { spawnSync } from 'node:child_process'
 import { rmSync } from 'node:fs'
 
 const TARBALL = 'package.tgz'
 
+const run = (label, command, args) => {
+  const result = spawnSync(command, args, { stdio: 'inherit' })
+
+  if (result.error) {
+    console.error(`check:package: could not run ${label}:`, result.error.message)
+  }
+
+  return result.status ?? 1
+}
+
 // Clears a tarball left behind by an interrupted prior run up front,
 // since the try/finally below only runs once publint has passed.
 rmSync(TARBALL, { force: true })
 
-const publint = spawnSync('pnpm', ['exec', 'publint'], { stdio: 'inherit' })
+let code = run('publint', 'pnpm', ['exec', 'publint'])
 
-if (publint.status !== 0) {
-  process.exitCode = publint.status ?? 1
-} else {
+if (code === 0) {
   try {
-    const pack = spawnSync('pnpm', ['pack', '--out', TARBALL], { stdio: 'inherit' })
+    code = run('pnpm pack', 'pnpm', ['pack', '--out', TARBALL])
 
-    if (pack.status !== 0) {
-      process.exitCode = pack.status ?? 1
-    } else {
-      const attw = spawnSync('pnpm', ['exec', 'attw', TARBALL, '--profile', 'esm-only'], {
-        stdio: 'inherit'
-      })
-
-      process.exitCode = attw.status ?? 1
+    if (code === 0) {
+      code = run('attw', 'pnpm', ['exec', 'attw', TARBALL, '--profile', 'esm-only'])
     }
   } finally {
     rmSync(TARBALL, { force: true })
   }
 }
+
+process.exitCode = code
