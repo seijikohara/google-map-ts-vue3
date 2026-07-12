@@ -23,6 +23,7 @@ export default defineConfig({
       fileName: () => `${name}.js`
     },
     sourcemap: true,
+    copyPublicDir: false,
     rollupOptions: {
       external: ['vue']
     }
