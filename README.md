@@ -17,7 +17,8 @@ npm install google-map-ts-vue3
 ```
 
 > `google-map-ts-vue3` v2 is an ESM-only package. Use `import` syntax; on
-> CommonJS, Node.js >= 20.19 can load it via `require()` (require(esm)).
+> CommonJS, Node.js `^20.19.0 || >=22.12.0` can load it via `require()`
+> (require(esm) is unflagged on those releases).
 
 ## Usage
 
