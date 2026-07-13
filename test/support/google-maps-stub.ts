@@ -1,5 +1,15 @@
 import { vi } from 'vitest'
 
+// `Window` is not globally augmented with `google` (see the local
+// `GoogleMapWindow` type in src/components/GoogleMapLoader.ts); mirror that
+// pattern here so the assignment below type-checks instead of assigning to
+// an undeclared Window property.
+interface GoogleMapWindow extends Window {
+  google: typeof google | undefined
+}
+
+declare const window: GoogleMapWindow
+
 type MapConstructorArgs = [element: HTMLElement, options: google.maps.MapOptions]
 
 export interface GoogleMapsStub {
