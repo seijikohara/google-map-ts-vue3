@@ -112,24 +112,24 @@ const handleMapCreated = (map: google.maps.Map) => {
   console.log('Map created:', map)
 }
 
-const handleMarkersCreated = (markers: google.maps.marker.AdvancedMarkerElement[]) => {
-  console.log('Markers created:', markers)
+const handleMarkersCreated = (createdMarkers: google.maps.marker.AdvancedMarkerElement[]) => {
+  console.log('Markers created:', createdMarkers)
 }
 
-const handlePolylinesCreated = (polylines: google.maps.Polyline[]) => {
-  console.log('Polylines created:', polylines)
+const handlePolylinesCreated = (createdPolylines: google.maps.Polyline[]) => {
+  console.log('Polylines created:', createdPolylines)
 }
 
-const handlePolygonsCreated = (polygons: google.maps.Polygon[]) => {
-  console.log('Polygons created:', polygons)
+const handlePolygonsCreated = (createdPolygons: google.maps.Polygon[]) => {
+  console.log('Polygons created:', createdPolygons)
 }
 
-const handleCirclesCreated = (circles: google.maps.Circle[]) => {
-  console.log('Circles created:', circles)
+const handleCirclesCreated = (createdCircles: google.maps.Circle[]) => {
+  console.log('Circles created:', createdCircles)
 }
 
-const handleRectanglesCreated = (rectangles: google.maps.Rectangle[]) => {
-  console.log('Rectangles created:', rectangles)
+const handleRectanglesCreated = (createdRectangles: google.maps.Rectangle[]) => {
+  console.log('Rectangles created:', createdRectangles)
 }
 </script>
 
