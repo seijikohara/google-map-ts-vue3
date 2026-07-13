@@ -1,3 +1,4 @@
+pmOnFail: ignore
 allowBuilds:
   esbuild: true
   playwright: true
