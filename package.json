@@ -56,7 +56,7 @@
     "@microsoft/api-extractor": "^7.58.9",
     "@types/node": "^26.0.0",
     "@typescript-eslint/parser": "^8.63.0",
-    "@vitejs/plugin-vue": "6.0.8",
+    "@vitejs/plugin-vue": "6.0.9",
     "@vitest/browser-playwright": "^4.1.10",
     "@vue/language-core": "^3.3.7",
     "@vue/tsconfig": "0.9.1",
