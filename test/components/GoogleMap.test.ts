@@ -17,7 +17,7 @@ const baseOptions: google.maps.MapOptions = {
 
 describe('GoogleMap', () => {
   it('constructs the map with the configured center and zoom, and emits map-created', async () => {
-    const { emitted } = await render(GoogleMap, {
+    const rendered = await render(GoogleMap, {
       props: {
         apiKey: 'test-api-key',
         options: baseOptions
@@ -34,7 +34,7 @@ describe('GoogleMap', () => {
       zoom: baseOptions.zoom
     })
 
-    const mapCreatedEvents = emitted<[google.maps.Map]>('map-created')
+    const mapCreatedEvents = rendered.emitted<[google.maps.Map]>('map-created')
     expect(mapCreatedEvents).toHaveLength(1)
     expect(mapCreatedEvents?.[0][0]).toBe(stub.mapCtor.mock.instances[0])
   })
@@ -45,7 +45,7 @@ describe('GoogleMap', () => {
       { position: { lat: 37.1, lng: 139.1 }, title: 'Position 2' }
     ]
 
-    const { emitted } = await render(GoogleMap, {
+    const rendered = await render(GoogleMap, {
       props: { apiKey: 'test-api-key', options: baseOptions, markers }
     })
 
@@ -60,7 +60,7 @@ describe('GoogleMap', () => {
     })
 
     const markersCreatedEvents =
-      emitted<[google.maps.marker.AdvancedMarkerElement[]]>('markers-created')
+      rendered.emitted<[google.maps.marker.AdvancedMarkerElement[]]>('markers-created')
     expect(markersCreatedEvents).toHaveLength(1)
     expect(markersCreatedEvents?.[0][0]).toEqual(stub.advancedMarkerElementCtor.mock.instances)
   })
@@ -79,7 +79,7 @@ describe('GoogleMap', () => {
       }
     ]
 
-    const { emitted } = await render(GoogleMap, {
+    const rendered = await render(GoogleMap, {
       props: { apiKey: 'test-api-key', options: baseOptions, polylines }
     })
 
@@ -92,7 +92,7 @@ describe('GoogleMap', () => {
       map: stub.mapCtor.mock.instances[0]
     })
 
-    const polylinesCreatedEvents = emitted<[google.maps.Polyline[]]>('polylines-created')
+    const polylinesCreatedEvents = rendered.emitted<[google.maps.Polyline[]]>('polylines-created')
     expect(polylinesCreatedEvents).toHaveLength(1)
     expect(polylinesCreatedEvents?.[0][0]).toEqual(stub.polylineCtor.mock.instances)
   })
@@ -114,7 +114,7 @@ describe('GoogleMap', () => {
       }
     ]
 
-    const { emitted } = await render(GoogleMap, {
+    const rendered = await render(GoogleMap, {
       props: { apiKey: 'test-api-key', options: baseOptions, polygons }
     })
 
@@ -127,7 +127,7 @@ describe('GoogleMap', () => {
       map: stub.mapCtor.mock.instances[0]
     })
 
-    const polygonsCreatedEvents = emitted<[google.maps.Polygon[]]>('polygons-created')
+    const polygonsCreatedEvents = rendered.emitted<[google.maps.Polygon[]]>('polygons-created')
     expect(polygonsCreatedEvents).toHaveLength(1)
     expect(polygonsCreatedEvents?.[0][0]).toEqual(stub.polygonCtor.mock.instances)
   })
@@ -145,7 +145,7 @@ describe('GoogleMap', () => {
       }
     ]
 
-    const { emitted } = await render(GoogleMap, {
+    const rendered = await render(GoogleMap, {
       props: { apiKey: 'test-api-key', options: baseOptions, circles }
     })
 
@@ -159,7 +159,7 @@ describe('GoogleMap', () => {
       map: stub.mapCtor.mock.instances[0]
     })
 
-    const circlesCreatedEvents = emitted<[google.maps.Circle[]]>('circles-created')
+    const circlesCreatedEvents = rendered.emitted<[google.maps.Circle[]]>('circles-created')
     expect(circlesCreatedEvents).toHaveLength(1)
     expect(circlesCreatedEvents?.[0][0]).toEqual(stub.circleCtor.mock.instances)
   })
@@ -176,7 +176,7 @@ describe('GoogleMap', () => {
       }
     ]
 
-    const { emitted } = await render(GoogleMap, {
+    const rendered = await render(GoogleMap, {
       props: { apiKey: 'test-api-key', options: baseOptions, rectangles }
     })
 
@@ -189,7 +189,8 @@ describe('GoogleMap', () => {
       map: stub.mapCtor.mock.instances[0]
     })
 
-    const rectanglesCreatedEvents = emitted<[google.maps.Rectangle[]]>('rectangles-created')
+    const rectanglesCreatedEvents =
+      rendered.emitted<[google.maps.Rectangle[]]>('rectangles-created')
     expect(rectanglesCreatedEvents).toHaveLength(1)
     expect(rectanglesCreatedEvents?.[0][0]).toEqual(stub.rectangleCtor.mock.instances)
   })

@@ -56,15 +56,16 @@ const createLoadPromise = (
     const cleanup = (): void => {
       clearTimeout(timeoutId)
       // Remove the temporary global callback function
-      delete (window as any)[callbackName]
+      Reflect.deleteProperty(window, callbackName)
     }
 
-    // Create a unique global callback for this script load operation
-    ;(window as any)[callbackName] = (): void => {
+    // Create a unique global callback for this script load operation.
+    // Reflect handles the generated property name without casting `window` to `any`.
+    Reflect.set(window, callbackName, (): void => {
       cleanup()
       console.info('[GoogleMap] Script loaded.')
       resolve()
-    }
+    })
 
     // oxlint-disable-next-line unicorn/prefer-add-event-listener -- switching to addEventListener would require a matching removeEventListener in cleanup() for symmetry, a logic change to core library code out of scope for this lint-toolchain swap; onerror here is a single handler tied 1:1 to this promise's lifecycle.
     scriptElement.onerror = (event): void => {
