@@ -1,15 +1,5 @@
 import { vi } from 'vitest'
 
-// `Window` is not globally augmented with `google` (see the local
-// `GoogleMapWindow` type in src/components/GoogleMapLoader.ts); mirror that
-// pattern here so the assignment below type-checks instead of assigning to
-// an undeclared Window property.
-interface GoogleMapWindow extends Window {
-  google: typeof google | undefined
-}
-
-declare const window: GoogleMapWindow
-
 type MapConstructorArgs = [element: HTMLElement, options: google.maps.MapOptions]
 
 export interface GoogleMapsStub {
@@ -39,11 +29,11 @@ export interface GoogleMapsStub {
  * each test starts with fresh, uncontaminated mock call history.
  */
 export function installGoogleMapsStub(): GoogleMapsStub {
-  const mapCtor = vi.fn<(...args: MapConstructorArgs) => void>(
-    function (this: Record<string, unknown>) {
-      this.setOptions = vi.fn()
-    }
-  )
+  const mapCtor = vi.fn<(...args: MapConstructorArgs) => void>(function (
+    this: Record<string, unknown>
+  ) {
+    this.setOptions = vi.fn()
+  })
 
   const advancedMarkerElementCtor = vi.fn(function (
     this: Record<string, unknown>,
@@ -67,7 +57,9 @@ export function installGoogleMapsStub(): GoogleMapsStub {
   const removeListener = vi.fn()
   const clearInstanceListeners = vi.fn()
 
-  window.google = {
+  // The stub implements only the members GoogleMap.vue touches. stubGlobal
+  // accepts `unknown`, so the partial fake needs no cast to `typeof google`.
+  vi.stubGlobal('google', {
     maps: {
       Map: mapCtor,
       marker: {
@@ -83,7 +75,7 @@ export function installGoogleMapsStub(): GoogleMapsStub {
         clearInstanceListeners
       }
     }
-  } as unknown as typeof google
+  })
 
   return {
     mapCtor,
