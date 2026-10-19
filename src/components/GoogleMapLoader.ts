@@ -56,12 +56,10 @@ const createLoadPromise = (
     const cleanup = (): void => {
       clearTimeout(timeoutId)
       // Remove the temporary global callback function
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       delete (window as any)[callbackName]
     }
 
     // Create a unique global callback for this script load operation
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     ;(window as any)[callbackName] = (): void => {
       cleanup()
       console.info('[GoogleMap] Script loaded.')

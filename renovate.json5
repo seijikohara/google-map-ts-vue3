@@ -63,18 +63,9 @@
       ]
     },
     {
-      description: 'Group linting and formatting tools',
+      description: 'Group the oxc linting and formatting toolchain',
       groupName: 'linting and formatting',
-      matchPackageNames: [
-        'eslint',
-        '@eslint/*',
-        'eslint-plugin-*',
-        'eslint-config-*',
-        '@typescript-eslint/*',
-        'vue-eslint-parser',
-        'oxlint',
-        'oxfmt'
-      ]
+      matchPackageNames: ['oxlint', 'oxfmt', '@oxlint/*', 'oxlint-tsgolint']
     },
     {
       description: 'Group the test toolchain',
