@@ -44,9 +44,7 @@
     "lint": "oxlint",
     "lint:fix": "oxlint --fix",
     "format": "oxfmt",
-    "format:check": "oxfmt --check",
-    "deps:update": "taze -w && pnpm install",
-    "deps:check": "taze"
+    "format:check": "oxfmt --check"
   },
   "dependencies": {
     "@types/google.maps": "^3.58.1"
@@ -65,10 +63,9 @@
     "oxlint-tsgolint": "^7.0.2004",
     "playwright": "^1.61.1",
     "publint": "^0.3.21",
-    "taze": "^20.0.0",
     "typescript": "^6.0.3",
+    "unplugin-dts": "^1.1.2",
     "vite": "^8.1.4",
-    "vite-plugin-dts": "^5.0.3",
     "vitest": "^4.1.10",
     "vitest-browser-vue": "^2.1.0",
     "vue": "^3.5.39",

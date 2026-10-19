@@ -56,8 +56,8 @@
       matchPackageNames: [
         'vite',
         'vite-plugin-*',
+        'unplugin-dts',
         'typescript',
-        'sass',
         '@microsoft/api-extractor',
         '@vue/language-core'
       ]

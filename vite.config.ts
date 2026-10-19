@@ -1,7 +1,7 @@
 import { fileURLToPath, URL } from 'node:url'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
-import dts from 'vite-plugin-dts'
+import dts from 'unplugin-dts/vite'
 
 const name = 'google-map-ts-vue3'
 
