@@ -38,3 +38,6 @@ pnpm-debug.log*
 
 # Development artifacts
 .claude/.dev/
+
+# Vitest 5 output (attachments, failure screenshots, reports)
+.vitest/
