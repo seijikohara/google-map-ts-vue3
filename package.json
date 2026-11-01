@@ -69,7 +69,7 @@
     "vitest": "^5.0.5",
     "vitest-browser-vue": "^3.1.0",
     "vue": "^3.5.39",
-    "vue-tsc": "3.3.13"
+    "vue-tsc": "3.3.14"
   },
   "peerDependencies": {
     "vue": ">=3.2.0"
